@@ -1,0 +1,1 @@
+simple randomizer for five people league of legends or cs2 that i made in like 15 minutes
