@@ -9,6 +9,7 @@
     <Nullable>enable</Nullable>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>full</TrimMode>
+    <ApplicationIcon>image.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
