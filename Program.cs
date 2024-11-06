@@ -1,103 +1,96 @@
-﻿namespace randomizer;
+﻿using System;
+using System.Collections.Generic;
 
-class Program
+namespace randomizer
 {
-    static void Main(string[] args)
+    class Program
     {
+        static void Main(string[] args)
+        {
+            List<string> names = new();
+            Console.WriteLine("Ingresa los nombres de los jugadores separados por una coma, para cerrar ingresa 0");
 
-        string name;
-        List<string> names = [];
-        Console.WriteLine("Ingresa los nombres de los jugadores separados por una coma, para cerrar ingresa 0");
+            string input = new(Console.ReadLine());
 
-        name = new(Console.ReadLine());
-
-        if (String.IsNullOrWhiteSpace(name))
-        {
-            Console.WriteLine("lista no puede estar vacia");
-        }
-        if (name == "0")
-        {
-            return;
-        }
-
-        string[] namesArray = name.Split(',');
-        HashSet<string> validateUniqueNames = new(namesArray);
-        if (validateUniqueNames.Count != namesArray.Length)
-        {
-            Console.WriteLine("no puedes repetir nombres");
-            return;
-        }
-        if (namesArray.Length != 10)
-        {
-            Console.WriteLine("lista de nombres invalida");
-            return;
-        }
-        foreach (string nam in namesArray)
-        {
-            if (String.IsNullOrWhiteSpace(nam))
+            if (String.IsNullOrWhiteSpace(input))
             {
-                Console.WriteLine("lista de nombres invalida");
+                Console.WriteLine("La lista no puede estar vacía");
+                return;
+            }
+            if (input == "0")
+            {
                 return;
             }
 
-            names.Add(nam.Trim());
-        }
-
-        Random random = new();
-        Console.WriteLine("=====================================");
-
-        Console.WriteLine("pickeando equipos");
-
-        // string[] names = new string[] { "Diego", "Ricardo", "Nacho", "Byron", "Nelson", "Nupri", "Tony", "Punpun", "Sewit", "Carlos" };
-
-        List<string> team1 = [];
-        List<string> team2 = [];
-        List<string> selecteds = [];
-
-        for (int i = 0; i < 5; i++)
-        {
-            int index = random.Next(0, names.Count);
-            string selectedName = names[index];
-
-            while (selecteds.Contains(selectedName))
+            string[] namesArray = input.Split(',');
+            HashSet<string> validateUniqueNames = new(namesArray);
+            if (validateUniqueNames.Count != namesArray.Length)
             {
-                index = random.Next(0, names.Count);
-                selectedName = names[index];
+                Console.WriteLine("No puedes repetir nombres");
+                return;
+            }
+            if (namesArray.Length != 10)
+            {
+                Console.WriteLine("Lista de nombres inválida");
+                return;
+            }
+            foreach (string name in namesArray)
+            {
+                if (String.IsNullOrWhiteSpace(name))
+                {
+                    Console.WriteLine("Lista de nombres inválida");
+                    return;
+                }
+
+                names.Add(name.Trim());
             }
 
-            selecteds.Add(selectedName);
-            team1.Add(selectedName);
-        }
+            Random random = new();
+            Console.WriteLine("=====================================");
+            Console.WriteLine("Pickeando equipos");
 
-        foreach (string selectedName in names)
-        {
-            if (!selecteds.Contains(selectedName))
+            List<string> team1 = new();
+            List<string> team2 = new();
+            HashSet<string> selecteds = new();
+
+            while (team1.Count < 5)
             {
-                team2.Add(selectedName);
+                int index = random.Next(names.Count);
+                string selectedName = names[index];
+
+                if (!selecteds.Contains(selectedName))
+                {
+                    selecteds.Add(selectedName);
+                    team1.Add(selectedName);
+                }
             }
+
+            foreach (string name in names)
+            {
+                if (!selecteds.Contains(name))
+                {
+                    team2.Add(name);
+                }
+            }
+
+            Console.WriteLine("=====================================");
+            Console.WriteLine("Team 1");
+            Console.WriteLine("=====================================");
+            foreach (string member in team1)
+            {
+                Console.WriteLine(member);
+            }
+
+            Console.WriteLine("=====================================");
+            Console.WriteLine("Team 2");
+            Console.WriteLine("=====================================");
+            foreach (string member in team2)
+            {
+                Console.WriteLine(member);
+            }
+
+            Console.WriteLine("=====================================");
+            Console.ReadKey();
         }
-
-        Console.WriteLine("=====================================");
-        Console.WriteLine("Team 1");
-        Console.WriteLine("=====================================");
-
-        foreach (string member in team1)
-        {
-            Console.WriteLine(member);
-        }
-
-        Console.WriteLine("=====================================");
-        Console.WriteLine("Team 2");
-        Console.WriteLine("=====================================");
-
-        foreach (string member in team2)
-        {
-            Console.WriteLine(member);
-
-        }
-
-        Console.WriteLine("=====================================");
-        Console.ReadKey();
     }
-
 }
