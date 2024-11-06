@@ -5,8 +5,8 @@ class Program
     static void Main(string[] args)
     {
 
-        string name = "";
-        List<string> names = new List<string>();
+        string name;
+        List<string> names = [];
         Console.WriteLine("Ingresa los nombres de los jugadores separados por una coma, para cerrar ingresa 0");
 
         name = new(Console.ReadLine());
@@ -21,7 +21,7 @@ class Program
         }
 
         string[] namesArray = name.Split(',');
-        HashSet<string> validateUniqueNames = new HashSet<string>(namesArray);
+        HashSet<string> validateUniqueNames = new(namesArray);
         if (validateUniqueNames.Count != namesArray.Length)
         {
             Console.WriteLine("no puedes repetir nombres");
@@ -43,18 +43,16 @@ class Program
             names.Add(nam.Trim());
         }
 
-
-
-        Random random = new Random();
+        Random random = new();
         Console.WriteLine("=====================================");
 
         Console.WriteLine("pickeando equipos");
 
         // string[] names = new string[] { "Diego", "Ricardo", "Nacho", "Byron", "Nelson", "Nupri", "Tony", "Punpun", "Sewit", "Carlos" };
 
-        List<string> team1 = new List<string>();
-        List<string> team2 = new List<string>();
-        List<string> selecteds = new List<string>();
+        List<string> team1 = [];
+        List<string> team2 = [];
+        List<string> selecteds = [];
 
         for (int i = 0; i < 5; i++)
         {
@@ -80,7 +78,6 @@ class Program
         }
 
         Console.WriteLine("=====================================");
-
         Console.WriteLine("Team 1");
         Console.WriteLine("=====================================");
 
@@ -90,7 +87,6 @@ class Program
         }
 
         Console.WriteLine("=====================================");
-
         Console.WriteLine("Team 2");
         Console.WriteLine("=====================================");
 
@@ -99,9 +95,8 @@ class Program
             Console.WriteLine(member);
 
         }
+
         Console.WriteLine("=====================================");
-
-
         Console.ReadKey();
     }
 
